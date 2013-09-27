@@ -107,15 +107,42 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export ARTEMIS_DIR=/home/arijit/newbranch/Artemis
-export QTDIR=/home/arijit/Software/qt
-export PATH=$PATH:/home/arijit/Software/qt/bin
-export LD_LIBRARY_PATH=/home/arijit/newbranch/Artemis/WebKit/WebKitBuild/Debug/lib
+export ARTEMIS_DIR=/home/ari/git/artemis/Artemis
+export QTDIR=$ARTEMIS_DIR/qt
+export PATH=$QTDIR/bin:$PATH
+#export PATH=$PATH:/home/arijit/Software/qt/bin
+#export LD_LIBRARY_PATH=$ARTEMIS_DIR/WebKit/WebKitBuild/Debug/lib
 #Source code the artemis project
-export sc=/home/arijit/newbranch/Artemis/WebKit/Source
-export at=/home/arijit/newbranch/Artemis/
-export wc=/home/arijit/newbranch/Artemis/WebKit/Source/WebCore
-export jc=/home/arijit/newbranch/Artemis/WebKit/Source/JavaScriptCore
-export PATH=$PATH:/home/arijit/Software/node-v0.10.13-linux-x64/bin
-export NODE_LIB=/home/arijit/Software/node-v0.10.13-linux-x64/lib/dtrace
+#export sc=/home/arijit/newbranch/Artemis/WebKit/Source
+export at=$ARTEMIS_DIR
+export wc=$at/WebKit/Source/WebCore
+export jc=$at/WebKit/Source/JavaScriptCore
+#export PATH=$PATH:/home/arijit/Software/node-v0.10.13-linux-x64/bin
+#export NODE_LIB=/home/arijit/Software/node-v0.10.13-linux-x64/lib/dtrace
+###
+
+
+#llvm path Latest Version
+#export PATH=/home/ari/llvm/build/Debug+Asserts/bin:$PATH
+
+
+#LLVM path for version 3.1
+export PATH=/home/ari/Compiler/llvm-3.1.src/Release+Debug+Asserts/bin:$PATH
+
+
+#Path for my shell scripts
+export PATH=/home/ari/bin:$PATH
+
+
+
+#CVS settings
+export CVS_RSH=`which ssh`
+export CVSROOT=:ext:rss@cvl.ece.vt.edu:/home/rss/cvsroot
+
+#CVS Artemis Path
+#export ARTEMIS_DIR=/home/ari/cvs/src/artemis/Artemis
+#export QTDIR=$ARTEMIS_DIR/qt
+#export PATH=$PATH:$QTDIR/bin
+export LD_LIBRARY_PATH=$ARTEMIS_DIR/WebKit/WebKitBuild/Debug/lib
+
 
