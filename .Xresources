@@ -1,0 +1,9 @@
+!This is a comment for the testing
+!
+Xcursor.theme: Vanilla-DMZ-AA
+Xcursor.size:  22
+
+!xterm*font:   -*-dina_huge-r-*-*-18-*-*-*-*-*-*
+xterm*font:     *-fixed-*-*-*-18-*
+!xterm*font: terminus-16
+!
