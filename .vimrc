@@ -1,6 +1,7 @@
 filetype on
 filetype plugin indent on
 syntax on
+set nu
 set path=.,..,/usr/local/include,/usr/include,,
 set bs=indent,eol,start
 set smarttab
