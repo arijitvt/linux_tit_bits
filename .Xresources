@@ -2,7 +2,7 @@
 !
 Xcursor.theme: Vanilla-DMZ-AA
 Xcursor.size:  22
-xterm*faceName: Liberation Mono:size=15:antialias=false
+xterm*faceName: Liberation Mono:size=12:antialias=false
 xterm*font: 7x13
 !xterm*font:   -*-dina_huge-r-*-*-18-*-*-*-*-*-*
 !xterm*font:     *-fixed-*-*-*-30-*

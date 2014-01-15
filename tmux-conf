@@ -7,15 +7,22 @@ bind -n M-Left select-pane -L
 bind -n M-Right select-pane -R
 bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
+bind -n M-w kill-pane
+
+
+#Copy -paste selection binding
+bind-key C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
+bind-key C-y run "tmux show-buffer | xclip -i"
 
 set -g mouse-select-pane on
+set -g mouse-select-window on
 set -g mode-mouse on
 
 setw -g monitor-activity on
 set -g visual-activity on
 
 
-set-window-option -g window-status-current-bg yellow
+set-window-option -g window-status-current-bg red
 
 
 

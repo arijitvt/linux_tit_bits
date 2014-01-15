@@ -2,7 +2,7 @@ filetype on
 filetype plugin indent on
 syntax on
 set nu
-set path=.,..,/usr/local/include,/usr/include,,
+set path=.,..,/usr/local/include,/usr/include,,/home/ari/install/boost
 set bs=indent,eol,start
 set smarttab
 set autoindent
@@ -83,3 +83,16 @@ function! UpdateTags()
 endfunction
 nnoremap <F5> :call UpdateTags()
 "
+"copy
+vmap <F7> "+ygv"zy`>
+"paste (Shift-F7 to paste after normal cursor, Ctrl-F7 to paste over visual selection)
+nmap <F7> "zgP
+nmap <S-F7> "zgp
+imap <F7> <C-r><C-o>z
+vmap <C-F7> "zp`]
+cmap <F7> <C-r><C-o>z
+"copy register
+
+autocmd FocusGained * let @z=@+
+
+
