@@ -77,22 +77,15 @@ if version >= 700
 	highlight   PmenuThumb    ctermfg=0 ctermbg=7
 endif
 
+"clang_complete option checking.
+let g:clang_library_path = '/home/arijit/Research/RTool/build/Release+Debug+Asserts/lib'
+let g:clang_user_options='-std=c++0x -x c++' 
+let g:clang_user_options='|| exit 0'
+
 function! UpdateTags()
 	execute ":!ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./"
 	echohl StatusLine | echo "C/C++ tag updated" | echohl None
 endfunction
-nnoremap <F5> :call UpdateTags()
-"
-"copy
-vmap <F7> "+ygv"zy`>
-"paste (Shift-F7 to paste after normal cursor, Ctrl-F7 to paste over visual selection)
-nmap <F7> "zgP
-nmap <S-F7> "zgp
-imap <F7> <C-r><C-o>z
-vmap <C-F7> "zp`]
-cmap <F7> <C-r><C-o>z
-"copy register
+nnoremap <F5> :call UpdateTags()<CR>
 
-autocmd FocusGained * let @z=@+
-
-
+:color desert

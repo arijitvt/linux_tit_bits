@@ -1,28 +1,132 @@
-#Change the binding
-unbind C-b
-set -g prefix C-a
+# 0 is too far from ` ;)
+set -g base-index 1
+ 
+# Automatically set window title
+set-window-option -g automatic-rename on
+set-option -g set-titles on
+ 
+#set -g default-terminal screen-256color
+set -g status-keys vi
+set -g history-limit 10000
+ 
+setw -g mode-keys vi
+setw -g mode-mouse on
+setw -g monitor-activity on
+set -g visual-activity on
+ 
+bind-key v split-window -h
+bind-key s split-window -v
+ 
+bind-key J resize-pane -D 5
+bind-key K resize-pane -U 5
+bind-key H resize-pane -L 5
+bind-key L resize-pane -R 5
 
-#Change the left-right-up-down
+bind-key M-j resize-pane -D
+bind-key M-k resize-pane -U
+bind-key M-h resize-pane -L
+bind-key M-l resize-pane -R
+ 
+# Vim style pane selection
+bind h select-pane -L
+bind j select-pane -D 
+bind k select-pane -U
+bind l select-pane -R
+ 
+# Use Alt-vim keys without prefix key to switch panes
+bind -n M-h select-pane -L
+bind -n M-j select-pane -D 
+bind -n M-k select-pane -U
+bind -n M-l select-pane -R
+ 
+# Use Alt-arrow keys without prefix key to switch panes
 bind -n M-Left select-pane -L
 bind -n M-Right select-pane -R
 bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
-bind -n M-w kill-pane
+ 
+# Shift arrow to switch windows
+bind -n S-Left  previous-window
+bind -n S-Right next-window
+ 
+# No delay for escape key press
+set -sg escape-time 0
+ 
+# Reload tmux config
+bind r source-file ~/.tmux.conf
+ 
+# pane number display
+set-option -g display-panes-active-colour colour33 #blue
+set-option -g display-panes-colour colour166 #orange
+
+# default window title colors
+set-window-option -g window-status-fg colour244 #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg colour166 #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg green #base02
+set-option -g pane-active-border-fg red #base01
+
+# message text
+set-option -g message-bg colour235 #base02
+set-option -g message-fg colour166 #orange
+
+# THEME
+# Let Xterm decide on the theme
+#set -g status-bg black
+#set -g status-fg white
+#set -g window-status-current-bg white
+#set -g window-status-current-fg black
+#set -g window-status-current-attr bold
 
 
-#Copy -paste selection binding
-bind-key C-p run "tmux set-buffer \"$(xclip -o)\"; tmux paste-buffer"
-bind-key C-y run "tmux show-buffer | xclip -i"
+# COnfiguring the interval 
 
-set -g mouse-select-pane on
-set -g mouse-select-window on
-set -g mode-mouse on
-
-setw -g monitor-activity on
-set -g visual-activity on
+set -g status-interval 1
+set -g status-justify centre # center align window list
+set -g status-left-length 20
+set -g status-right-length 140
+set -g status-left '#[fg=green]#H #[fg=black]• #[fg=green,bright]#(uname -r | cut -c 1-6)#[default]'
+set -g status-right '#[fg=green,bg=default,bright]#(tmux-mem-cpu-load 1) #[fg=red,dim,bg=default]#(uptime | cut -f 4-5 -d " " | cut -f 1 -d ",") #[fg=white,bg=default]%a%l:%M:%S %p#[default] #[fg=green]%Y-%m-%d'
 
 
-set-window-option -g window-status-current-bg red
+# https://github.com/edkolev/dots/blob/master/tmux.conf
+# Updates for tmux 1.9's current pane splitting paths.
+if-shell "[[ `tmux -V` == *1.9* ]]" 'unbind c; bind c new-window -c "#{pane_current_path}"'
+if-shell "[[ `tmux -V` == *1.9* ]]" 'unbind s; bind s split-window -v -c "#{pane_current_path}"'
+if-shell "[[ `tmux -V` == *1.9* ]]" "unbind '\"'; bind '\"' split-window -v -c '#{pane_current_path}'"
+if-shell "[[ `tmux -V` == *1.9* ]]" 'unbind v; bind v split-window -h -c "#{pane_current_path}"'
+if-shell "[[ `tmux -V` == *1.9* ]]" 'unbind %; bind % split-window -h -c "#{pane_current_path}"'
 
 
+# color
+set -g default-terminal "screen-256color"
 
+# status bar
+set-option -g status-utf8 on
+
+# auto window rename
+set-window-option -g automatic-rename
+
+
+bind-key C command-prompt -p "Name of new window: " "new-window -n '%%'"
+
+
+# C-b is not acceptable -- Vim uses it
+set-option -g prefix C-a
+bind-key C-a last-window
+
+
+#activating mouse support
+set mouse-select-pane on
+set mouse-select-window on
+
+#Swapping windows
+bind-key -n C-S-Left swap-window -t -1
+bind-key -n C-S-Right swap-window -t +1
