@@ -1,4 +1,4 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+#~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -55,19 +55,24 @@ fi
 
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\e[1;34m\u\e[m@:[ \e[1;32m\W\e[m]\$ '
 fi
-unset color_prompt force_color_prompt
+unset olor_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    #PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h:\]$PS1"
     ;;
 *)
     ;;
 esac
+
+#My Customized ps1
+#PS1='\[\e[0;32m\]\u\[\e[m\]:\[\e[1;34m\]\W\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[\e[1;37m\]'
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -79,13 +84,16 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
+    
 fi
 
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lcks='gnome-screensaver-command l'
+alias lcks='vlock -t=2 -a' 
+alias rm='rm -i'
+alias del='rm -rf'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -107,42 +115,69 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-export ARTEMIS_DIR=/home/ari/git/artemis/Artemis
-export QTDIR=$ARTEMIS_DIR/qt
-export PATH=$QTDIR/bin:$PATH
-#export PATH=$PATH:/home/arijit/Software/qt/bin
-#export LD_LIBRARY_PATH=$ARTEMIS_DIR/WebKit/WebKitBuild/Debug/lib
-#Source code the artemis project
-#export sc=/home/arijit/newbranch/Artemis/WebKit/Source
-export at=$ARTEMIS_DIR
-export wc=$at/WebKit/Source/WebCore
-export jc=$at/WebKit/Source/JavaScriptCore
-#export PATH=$PATH:/home/arijit/Software/node-v0.10.13-linux-x64/bin
-#export NODE_LIB=/home/arijit/Software/node-v0.10.13-linux-x64/lib/dtrace
-###
+#Generic library path
+export LD_LIBRARY_PATH=/usr/local/lib
+
 
 
 #llvm path Latest Version
-#export PATH=/home/ari/llvm/build/Debug+Asserts/bin:$PATH
-
-
-#LLVM path for version 3.1
-export PATH=/home/ari/Compiler/llvm-3.1.src/Release+Debug+Asserts/bin:$PATH
-
+#export PATH=/home/arijit/Compiler/llvm-3.4/Release+Debug+Asserts/bin:$PATH
 
 #Path for my shell scripts
-export PATH=/home/ari/bin:$PATH
-
-
+export PATH=/home/arijit/bin:$PATH
 
 #CVS settings
 export CVS_RSH=`which ssh`
 export CVSROOT=:ext:rss@cvl.ece.vt.edu:/home/rss/cvsroot
 
-#CVS Artemis Path
-#export ARTEMIS_DIR=/home/ari/cvs/src/artemis/Artemis
-#export QTDIR=$ARTEMIS_DIR/qt
-#export PATH=$PATH:$QTDIR/bin
-export LD_LIBRARY_PATH=$ARTEMIS_DIR/WebKit/WebKitBuild/Debug/lib
+
+alias ctags='ctags -R --languages=C++ --c++-kinds=+p --fields=+iaS --extra=+q ./'
+
+# OPAM configuration
+#. /home/ari/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
+
+
+#This is jdk7 path setting
+export JAVA_HOME=/home/arijit/install/jdk1.7.0_45
+export PATH=$JAVA_HOME/bin:$PATH
+
+#RTool LLVM Path
+export PATH=/home/arijit/Research/RTool/build/Release+Debug+Asserts/bin:$PATH
+export LD_LIBRARY_PATH=/home/arijit/Research/RTool/build/Release+Debug+Asserts/lib:$LD_LIBRARY_PATH
+
+export DAIKONDIR=/home/arijit/Research/RTool/Dependencies/daikon
+#source $DAIKONDIR/scripts/daikon.bashrc
+
+
+#RTool Configuration ends here.
+
+#CVS specific configuration
+export CVS_RSH=`which ssh`
+export CVS_ROOT=:ext:rss@cvl.ece.vt.edu:/home/rss/cvsroot
+
+#BOOST LIBRARY
+export boost_inc=/home/arijit/install/boost_1_55_0/install/include
+export boost_lib=/home/arijit/install/boost_1_55_0/install/lib
+export LD_LIBRARY_PATH=$boost_lib:LD_LIBRARY_PATH
+
+
+
+#Node.js path inclusion
+export node_inc=/home/arijit/install/node-v0.10.29/install/include
+export PATH=/home/arijit/install/node-v0.10.29/install/bin:$PATH
+export PATH=/home/arijit/install/node-v0.10.29/install/lib/node_modules/npm/bin/node-gyp-bin:$PATH
+
+
+#Scala Path setting 
+export SCALA_HOME=/home/arijit/install/scala-2.9.0
+export PATH=$SCALA_HOME/bin:$PATH
+
+#Spark configuration
+export SPARK_HOME=/home/arijit/install/spark-0.9.1
+export PATH=$SPARK_HOME/bin:$PATH
+export PATH=$SPARK_HOME/sbt:$PATH
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
 
 

@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/arijit/Research/RTool/llvm-3.2.src/lib/Transforms/Test'
+let g:netrw_dirhist_2='/home/arijit/Research/RTool/llvm-3.2.src/lib/Transforms'
+let g:netrw_dirhist_3='/home/arijit/Research/RTool/llvm-3.2.src/lib/Transforms/Daikon'
+let g:netrw_dirhist_4='/home/arijit/Daikon'
+let g:netrw_dirhist_5='/home/arijit/git/cms-1.0'
